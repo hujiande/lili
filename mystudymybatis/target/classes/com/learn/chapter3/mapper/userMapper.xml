@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.learn.chapter3.mapper.UserMapper">
+    <resultMap id="userMap" type="com.learn.chapter3.po.User" >
+        <result column="id" javaType="Long" jdbcType="BIGINT" property="id" />
+        <result column="userName" property="userName" />
+        <result column="cnname" property="cnname" />
+        <result column="sex" property="sex" typeHandler="org.apache.ibatis.type.EnumOrdinalTypeHandler" />
+        <result column="email" property="email" />
+        <result column="mobile" property="mobile" />
+        <result column="note" property="note" />
+    </resultMap>
+
+    <select id="getUser" parameterType="Long" resultMap="userMap">
+        SELECT id,userName,cnname,birthday,sex,email,mobile,note FROM t_user c WHERE id = #{id};
+    </select>
+    <insert id="insertUser" parameterType="user">
+        INSERT INTO t_user(userName,cnname,birthday,sex,email,mobile,note)
+              VALUES (#{userName},#{cnname},#{birthday},#{sex,typeHandler=org.apache.ibatis.type.EnumOrdinalTypeHandler},#{email},#{mobile},#{note});
+    </insert>
+</mapper>
